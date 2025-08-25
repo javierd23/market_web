@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- whatssapp -->
+    <style>
+        /* Styles for the WhatsApp button container */
+        .whatsapp-fixed-button {
+            position: fixed; /* This is the key property */
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000; /* Ensure the button is on top of other content */
+        }
+
+        /* Styling for the WhatsApp icon image */
+        .whatsapp-icon {
+            position: relative; /* Needed for positioning the notification dot */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: heartbeat 1.5s infinite; /* Heartbeat animation for the icon */
+        }
+
+        /* Hover effect */
+        .whatsapp-icon:hover {
+            transform: scale(1.1); /* Makes the icon slightly bigger on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* The heartbeat animation */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.05); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* The new notification dot */
+        .notification-dot {
+            position: absolute; /* Positions the dot relative to its parent */
+            top: 0;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            background-color: #ef4444; /* Tailwind's red-500 */
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse 2s infinite; /* Pulsating animation for the dot */
+        }
+
+        /* The new pulse animation for the dot */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <style>
+        /* Mobile menu animations */
+        .mobile-menu-open {
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+        .mobile-menu-close {
+            animation: fadeOut 0.3s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* Nav link underline animation */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hover effect for FASTCONNECT text */
+        .fastconnect-hover-effect {
+            position: relative;
+            display: inline-block;
+        }
+        .fastconnect-hover-effect::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6;
+            transition: width 0.3s ease-in-out;
+        }
+        .fastconnect-hover-effect:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+      <div class="flex items-center h-full space-x-3">
+        <!-- Logo Video -->
+        <a href="{% url 'home:home' %}" class="h-full flex items-center">
+          <video
+            src="{% static 'home/logo2.mp4' %}"
+            autoplay muted loop
+            playsinline
+            class="h-14 md:h-20 w-auto object-contain "
+          ></video>
+        </a>
+
+        <!-- Brand Text -->
+        <a
+          href="{% url 'home:home' %}"
+          class="relative text-3xl md:text-4xl font-bold font-serif tracking-wide text-gray-900 transition duration-300 group"
+        >
+          <span class="text-gray-900 group-hover:text-blue-700 transition-colors duration-300">FAST</span>
+          <span class="text-blue-800 group-hover:text-gray-900 transition-colors duration-300">CONNECT</span>
+
+          <!-- Underline hover effect -->
+          <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-800 group-hover:w-full transition-all duration-500"></span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex space-x-10 items-center">
+        <a href="{% url 'home:contact' %}"
+           class="nav-link text-gray-800 text-lg font-medium transition {% if request.resolver_match.url_name == 'home:contact' %}active text-blue-600{% else %}hover:text-blue-600{% endif %}">
+          Contactos
+        </a>
+        <a href="{% url 'home:plan' %}"
+           class="nav-link text-gray-800 text-lg font-medium transition {% if request.resolver_match.url_name == 'home:plan' %}active text-blue-600{% else %}hover:text-blue-600{% endif %}">
+          Planes
+        </a>
+        <a href="{% url 'home:about' %}"
+           class="nav-link text-gray-800 text-lg font-medium transition {% if request.resolver_match.url_name == 'home:about' %}active text-blue-600{% else %}hover:text-blue-600{% endif %}">
+          Nosotros
+        </a>
+      </div>
+
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-900 focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-gray-50 border-t border-gray-200">
+      <a href="{% url 'home:contact' %}"
+         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:contact' %}active text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+        Contactos
+      </a>
+      <a href="{% url 'home:plan' %}"
+         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:plan' %}active text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+        Planes
+      </a>
+      <a href="{% url 'home:about' %}"
+         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:about' %}active text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+        Nosotros
+      </a>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+    <!-- WhatsApp fixed button HTML -->
+    <a href="https://wa.me/yourphonenumber" target="_blank" class="whatsapp-fixed-button">
+        <div class="whatsapp-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" style="width: 100%; height: 100%;">
+            <span class="notification-dot"></span>
+        </div>
+    </a>
+
+  <footer class="bg-gray-900 text-gray-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="md:col-span-1">
+        <a href="{% url 'home:home' %}" class="flex items-center space-x-2">
+          <video
+            src="{% static 'home/logo2.mp4' %}"
+            autoplay muted loop
+            class="h-14 w-auto object-contain"
+          ></video>
+          <span class="text-2xl font-bold font-serif tracking-wide">FASTCONNECT</span>
+        </a>
+        <p class="mt-3 text-gray-400 text-sm">
+          Conectando hogares y empresas con internet rápido, estable y accesible.
+        </p>
+      </div>
+
+      <div class="flex flex-col space-y-2 md:col-span-1">
+        <h3 class="text-lg font-semibold mb-2 text-white">Enlaces Rápidos</h3>
+        <a href="{% url 'home:plan' %}" class="hover:text-blue-400 transition">Planes</a>
+        <a href="{% url 'home:about' %}" class="hover:text-blue-400 transition">Nosotros</a>
+        <a href="{% url 'home:contact' %}" class="hover:text-blue-400 transition">Contactos</a>
+      </div>
+
+      <div class="md:col-span-1">
+        <h3 class="text-lg font-semibold mb-2 text-white">Contáctanos</h3>
+        <p class="text-gray-400">📍 Santo Domingo, República Dominicana</p>
+        <p class="text-gray-400">📞 +1 (809) 555-1234</p>
+        <p class="text-gray-400">✉️ soporte@fastconnect.do</p>
+
+        <div class="flex space-x-4 mt-4">
+          <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69..."/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.04c-5.5 0-9.96 4.46..."/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 py-4 text-center text-sm text-gray-500">
+      © 2025 FASTCONNECT EDCCM, SRL. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('mobile-menu-open');
+      } else {
+        menu.classList.remove('mobile-menu-open');
+        menu.classList.add('mobile-menu-close');
+        setTimeout(() => {
+          menu.classList.add('hidden');
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>

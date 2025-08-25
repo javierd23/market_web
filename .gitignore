@@ -1,0 +1,10 @@
+# Django #
+*.log *.pot *.pyc __pycache__/ db.sqlite3 media/ staticfiles/
+# Environments #
+.env venv/ ENV/ env/ .venv/
+# JetBrains IDE #
+.idea/
+# OS generated files #
+.DS_Store
+Thumbs.db
+

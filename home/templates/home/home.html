@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="relative w-full h-screen overflow-hidden">
+  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="{% static 'home/backg.mp4' %}" type="video/mp4">
+  </video>
+
+  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight drop-shadow-lg">
+      <span class="block">FastConnect</span>
+    </h1>
+    <p class="max-w-xl text-lg md:text-2xl font-light mb-6">
+      Te conecta a la velocidad que mereces. Internet rápido, estable y accesible para tu hogar.
+    </p>
+    <a href="{% url 'home:plan' %}"
+      class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-lg font-bold uppercase transition duration-300 transform hover:scale-105 shadow-xl">
+      Ver Planes
+    </a>
+  </div>
+</div>
+
+<div class="py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-12">Con nosotros obtendrás</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+
+      <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transform hover:scale-105 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-blue-500 group-hover:animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L6 12h5v8h2v-8h5L12 2z"/>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Velocidad garantizada</h3>
+        <p class="text-gray-600">Disfruta de la máxima velocidad sin interrupciones para todas tus actividades en línea.</p>
+      </div>
+
+      <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transform hover:scale-105 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-blue-500 group-hover:animate-bounce" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Instalación rápida</h3>
+        <p class="text-gray-600">Nuestro equipo de profesionales te conectará en tiempo récord y sin complicaciones.</p>
+      </div>
+
+      <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transform hover:scale-105 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-blue-500 group-hover:animate-spin" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Planes flexibles</h3>
+        <p class="text-gray-600">Elige el plan que mejor se adapte a tus necesidades y presupuesto, sin contratos forzosos.</p>
+      </div>
+
+      <div class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transform hover:scale-105 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-blue-500 group-hover:animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm0-4h-2V7h2v7z"/>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Soporte técnico 24/7</h3>
+        <p class="text-gray-600">Nuestro equipo de soporte está siempre disponible para ayudarte, cualquier día y a cualquier hora.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="plans" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-4">Nuestros Planes</h2>
+            <p class="text-xl text-center text-gray-600 mb-12">Encuentra el plan perfecto para tu hogar</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plan Básico -->
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-blue-500 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plan Básico</h3>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-2">10 Mbps</div>
+                    <p class="text-gray-600 mb-6">Perfecto para navegación básica y streaming en HD</p>
+                    <div class="text-3xl font-bold text-gray-900 mb-6">RD$800.00<span class="text-lg font-normal text-gray-600">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+                        Solicitar ahora
+                    </button>
+                </div>
+
+                <!-- Plan Familiar -->
+                <div class="bg-blue-600 text-white rounded-2xl p-8 text-center transform scale-105 shadow-2xl">
+                    <div class="bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 inline-block">
+                        MÁS POPULAR
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Plan Intermedio</h3>
+                    <div class="text-4xl font-extrabold mb-2">80 Mbps</div>
+                    <p class="text-blue-100 mb-6">Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas.</p>
+                    <div class="text-3xl font-bold mb-6">RD$1,500.00<span class="text-lg font-normal text-blue-200">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-white text-blue-600 hover:bg-gray-100 rounded-full font-bold transition duration-300">
+                        Contratar Ahora
+                    </button>
+                </div>
+
+                <!-- Plan Premium -->
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-blue-500 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plan Esencial</h3>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-2">50 Mbps</div>
+                    <p class="text-gray-600 mb-6">Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo.</p>
+                    <div class="text-3xl font-bold text-gray-900 mb-6">RD$1,000.00<span class="text-lg font-normal text-gray-600">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+                        Contratar Ahora
+                    </button>
+                </div>
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-blue-500 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plan Avanzado</h3>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-2">100 Mbps</div>
+                    <p class="text-gray-600 mb-6">Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición.</p>
+                    <div class="text-3xl font-bold text-gray-900 mb-6">RD$2,000.00<span class="text-lg font-normal text-gray-600">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+                        Contratar Ahora
+                    </button>
+                </div>
+                <div class="bg-yellow-500 border-2 border-yellow-200 rounded-2xl p-8 text-center hover:border-yellow-500 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plan Ultra</h3>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-2">200 Mbps</div>
+                    <p class="text-gray-600 mb-6">La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming.</p>
+                    <div class="text-3xl font-bold text-gray-900 mb-6">RD$3,400.00<span class="text-lg font-normal text-gray-600">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+                        Contratar Ahora
+                    </button>
+                </div>
+
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center hover:border-blue-500 transition duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plan Premium</h3>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-2">150 Mbps</div>
+                    <p class="text-gray-600 mb-6">Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones.</p>
+                    <div class="text-3xl font-bold text-gray-900 mb-6">RD$2,500.00<span class="text-lg font-normal text-gray-600">/mes</span></div>
+                    <button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+                        Contratar Ahora
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
