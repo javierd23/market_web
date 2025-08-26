@@ -2,7 +2,226 @@
 {% load static %}
 
 {% block content %}
+<!-- Hero Section -->
+<div class="relative w-full h-[70vh] overflow-hidden">
+  <!-- Background Video with Image Fallback -->
+  <img src="{% static 'home/plan.jpg' %}"
+     alt="Background"
+     class="absolute inset-0 w-full h-full object-cover">
 
+  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
 
+  <!-- Hero Content -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight drop-shadow-lg"
+        data-aos="fade-up" data-aos-duration="1000">
+      Planes de Internet
+    </h1>
+    <p class="max-w-2xl text-base sm:text-lg md:text-xl font-light mb-6"
+       data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+      Escoge el plan que mejor se adapte a tus necesidades. Conexión estable, rápida y confiable.
+    </p>
+    <a href="#comparison"
+      class="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-base sm:text-lg font-bold uppercase transition duration-300 transform hover:scale-105 shadow-xl"
+      data-aos="fade-up" data-aos-duration="1400" data-aos-delay="400">
+      Comparar Planes
+    </a>
+  </div>
+</div>
 
+<!-- Pricing Cards Section -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Plan Básico -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true">
+        <h3 class="text-2xl font-bold mb-4">Plan Básico</h3>
+        <p class="text-gray-600 mb-6">Perfecto para navegación básica y streaming en HD.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$800.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6 text-gray-700">
+          <li>10 Mbps de velocidad</li>
+          <li>Soporte 24/7</li>
+          <li>5 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          Elegir Plan
+        </a>
+      </div>
+
+      <!-- Plan Esencial -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="100">
+        <h3 class="text-2xl font-bold mb-4">Plan Esencial</h3>
+        <p class="text-gray-600 mb-6">Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$1,000.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6 text-gray-700">
+          <li>50 Mbps de velocidad</li>
+          <li>Soporte 24/7</li>
+          <li>25 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          Elegir Plan
+        </a>
+      </div>
+
+      <!-- Plan Intermedio (Destacado) -->
+      <div class="relative bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-2xl p-8 text-center text-white ring-4 ring-blue-400 hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="200">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 bg-yellow-400 text-yellow-900 text-xs font-bold py-1 px-4 rounded-full shadow-lg transform rotate-6">
+          Más Popular
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Plan Intermedio</h3>
+        <p class="text-blue-100 mb-6">Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$1,500.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6">
+          <li>80 Mbps de velocidad</li>
+          <li>Soporte 24/7</li>
+          <li>40 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-white text-blue-600 font-semibold hover:bg-gray-100 transition">
+          Elegir Plan
+        </a>
+      </div>
+
+      <!-- Plan Avanzado -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="300">
+        <h3 class="text-2xl font-bold mb-4">Plan Avanzado</h3>
+        <p class="text-gray-600 mb-6">Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$2,000.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6 text-gray-700">
+          <li>100 Mbps de velocidad</li>
+          <li>Soporte 24/7</li>
+          <li>50 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          Elegir Plan
+        </a>
+      </div>
+
+      <!-- Plan Premium -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="400">
+        <h3 class="text-2xl font-bold mb-4">Plan Premium</h3>
+        <p class="text-gray-600 mb-6">Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$2,500.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6 text-gray-700">
+          <li>150 Mbps de velocidad</li>
+          <li>Soporte 24/7</li>
+          <li>75 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          Elegir Plan
+        </a>
+      </div>
+
+      <!-- Plan Ultra -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="500">
+        <h3 class="text-2xl font-bold mb-4">Plan Ultra</h3>
+        <p class="text-gray-600 mb-6">La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming.</p>
+        <p class="text-4xl font-extrabold mb-6">RD$3,400.00<span class="text-lg font-medium">/mes</span></p>
+        <ul class="space-y-3 mb-6 text-gray-700">
+          <li>200 Mbps de velocidad</li>
+          <li>Soporte VIP 24/7</li>
+          <li>100 Mbs de subida</li>
+        </ul>
+        <a href="#" class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+          Elegir Plan
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table Section -->
+<section id="comparison" class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-center mb-10" data-aos="fade-up" data-aos-once="true">Comparación de Planes</h2>
+
+    <!-- Desktop/Tablet Comparison Table -->
+    <div class="hidden md:block overflow-x-auto shadow-xl rounded-lg border border-gray-200" data-aos="fade-up" data-aos-once="true">
+      <table class="min-w-full">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="px-4 py-3 text-left">Características</th>
+            <th class="px-4 py-3">Básico</th>
+            <th class="px-4 py-3">Esencial</th>
+            <th class="px-4 py-3 bg-blue-700">Intermedio</th>
+            <th class="px-4 py-3">Avanzado</th>
+            <th class="px-4 py-3">Premium</th>
+            <th class="px-4 py-3">Ultra</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium">Velocidad</td>
+            <td class="text-center">10 Mbps</td>
+            <td class="text-center">50 Mbps</td>
+            <td class="text-center font-bold">80 Mbps</td>
+            <td class="text-center">100 Mbps</td>
+            <td class="text-center">150 Mbps</td>
+            <td class="text-center">200 Mbps</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Soporte</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center font-bold text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium">Subida</td>
+            <td class="text-center">5 Mbs</td>
+            <td class="text-center">25 Mbs</td>
+            <td class="text-center font-bold">40 Mbs</td>
+            <td class="text-center">50 Mbs</td>
+            <td class="text-center">75 Mbs</td>
+            <td class="text-center">100 Mbs</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Latencia Baja</td>
+            <td class="text-center text-red-500">&#x2718;</td>
+            <td class="text-center text-red-500">&#x2718;</td>
+            <td class="text-center font-bold text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+            <td class="text-center text-green-500">&#x2714;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile-only Comparison List -->
+    <div class="md:hidden space-y-8" data-aos="fade-up" data-aos-once="true" data-aos-delay="200">
+      {% for plan in plans %}
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-blue-600 mb-4">{{ plan.name }}</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-center">
+                <span class="font-medium w-1/2">Velocidad:</span>
+                <span class="text-right w-1/2">{{ plan.velocidad }}</span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-medium w-1/2">Soporte:</span>
+                <span class="text-right w-1/2">{{ plan.soporte }}</span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-medium w-1/2">Subida:</span>
+                <span class="text-right w-1/2">{{ plan.subida }}</span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-medium w-1/2">Latencia Baja:</span>
+                <span class="text-right w-1/2">
+                  {% if plan.latencia_baja %}
+                    <span class="text-green-500">&#x2714;</span>
+                  {% else %}
+                    <span class="text-red-500">&#x2718;</span>
+                  {% endif %}
+                </span>
+              </li>
+            </ul>
+          </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
 {% endblock %}
