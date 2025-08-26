@@ -2,7 +2,157 @@
 {% load static %}
 
 {% block content %}
+<!-- Hero Section with Background Gradient -->
+<section class="relative bg-gradient-to-r from-blue-50 via-white to-blue-50 py-16 sm:py-20 overflow-hidden">
+  <!-- Optional subtle animated circles background -->
+  <div class="absolute inset-0">
+    <div class="w-72 h-72 bg-blue-200 rounded-full opacity-30 absolute -top-16 -left-16 animate-pulse-slow"></div>
+    <div class="w-96 h-96 bg-purple-200 rounded-full opacity-20 absolute -bottom-24 -right-20 animate-pulse-slow"></div>
+  </div>
 
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
+    <!-- Hero Image -->
+    <div class="overflow-hidden rounded-2xl shadow-lg transform opacity-0 translate-y-10 hero-image">
+      <img src="{% static 'home/family.jpg' %}" alt="Imagen Familia" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+    </div>
 
+    <!-- Text -->
+    <div class="relative z-10">
+      <h3 class="text-blue-500 font-semibold text-lg mb-2">Tu mejor conexión a internet en RD</h3>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">¿Quiénes somos?</h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        <span class="font-semibold text-blue-500">FastConnect</span> es una empresa dedicada a proveer
+        el mejor servicio de internet para el hogar. Conectamos familias con estabilidad, rapidez y confianza.
+      </p>
+      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+        Con más de <span id="experience-years" class="font-semibold text-gray-800">8</span> años de experiencia,
+        seguimos innovando para ofrecer servicios adaptados a cada cliente.
+      </p>
+
+      <!-- Stats Counters -->
+      <div class="mt-8 grid grid-cols-2 gap-6 md:grid-cols-3">
+        <div class="flex flex-col items-center counter relative" data-target="8">
+          <div class="relative inline-block">
+            <span class="text-3xl font-bold text-blue-500">0</span>
+            <span class="absolute -top-2 left-full text-xl font-bold text-blue-500">+</span>
+          </div>
+          <p class="text-gray-600 mt-2 text-center">Años de experiencia</p>
+        </div>
+        <div class="flex flex-col items-center counter relative" data-target="258">
+          <div class="relative inline-block">
+            <span class="text-3xl font-bold text-blue-500">0</span>
+            <span class="absolute -top-2 left-full text-xl font-bold text-blue-500">+</span>
+          </div>
+          <p class="text-gray-600 mt-2 text-center">Clientes satisfechos</p>
+        </div>
+        <div class="flex flex-col items-center counter relative" data-target="6">
+          <div class="relative inline-block">
+            <span class="text-3xl font-bold text-blue-500">0</span>
+            <span class="absolute -top-2 left-full text-xl font-bold text-blue-500">+</span>
+          </div>
+          <p class="text-gray-600 mt-2 text-center">Planes activos</p>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="mt-8">
+        <a href="{% url 'home:plan' %}" class="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:from-yellow-400 hover:to-orange-500 hover:shadow-xl transition duration-300">
+          Conoce nuestros planes
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section with Pattern Background -->
+<section class="py-16 sm:py-20 bg-gradient-to-b from-gray-200 to-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-pattern opacity-10"></div> <!-- You can define bg-pattern in CSS for a subtle dot or wave -->
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12">Con nosotros obtendrás</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+
+      {% for feature in features %}
+      <div class="group p-6 sm:p-8 bg-white rounded-2xl shadow-md transform transition duration-500 hover:-translate-y-1 feature-card opacity-0 translate-y-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-4 text-blue-500 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+          <path d="{{ feature.icon }}"/>
+        </svg>
+        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">{{ feature.title }}</h3>
+        <p class="text-gray-600 text-sm sm:text-base">{{ feature.desc }}</p>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- installation section -->
+<section>
+  <div>
+
+  </div>
+</section>
+
+<!-- Scroll-triggered Counters and Animations -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Intersection Observer for counters
+  const counters = document.querySelectorAll('.counter > div > span:first-child');
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.parentElement.parentElement.dataset.target);
+        let count = 0;
+        const animate = () => {
+          const increment = Math.ceil(target / 100);
+          count += increment;
+          if(count > target) count = target;
+          el.textContent = count;
+          if(count < target) requestAnimationFrame(animate);
+        };
+        animate();
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.6 });
+  counters.forEach(counter => counterObserver.observe(counter));
+
+  // Intersection Observer for feature cards
+  const features = document.querySelectorAll('.feature-card');
+  const featureObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.remove('opacity-0','translate-y-10');
+        entry.target.classList.add('opacity-100','translate-y-0','transition','duration-1000','ease-out');
+        featureObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  features.forEach(feature => featureObserver.observe(feature));
+
+  // Intersection Observer for hero image
+  const heroImage = document.querySelector('.hero-image');
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        heroImage.classList.remove('opacity-0','translate-y-10');
+        heroImage.classList.add('opacity-100','translate-y-0','transition','duration-1000','ease-out');
+        heroObserver.unobserve(heroImage);
+      }
+    });
+  }, { threshold: 0.5 });
+  heroObserver.observe(heroImage);
+});
+</script>
+
+<!-- Optional Tailwind CSS for pulse animation -->
+<style>
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+}
+.animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+</style>
 {% endblock %}
