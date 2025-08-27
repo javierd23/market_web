@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ozebgbv@4k72qpp0@6w9e+qbo3__dl64#ygvt4u_$#=y=%w!rz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,8 +44,14 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    "crispy_forms",
+    "crispy_tailwind",
 
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_CLASS_CONVERTERS = {"input": "rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"}
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -128,3 +137,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = 'localhost'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')
