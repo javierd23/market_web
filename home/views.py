@@ -74,7 +74,7 @@ class ContactPage(View):
                     subject=f'Solicitud de contacto de {name}',
                     body=email_body,
                     from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=[settings.EMAIL_HOST_USER],
+                    to=['fastconnect000@gmail.com'],
                     reply_to=[email],
                 )
                 msg.send()

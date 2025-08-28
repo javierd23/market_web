@@ -37,3 +37,6 @@ EMAIL_HOST_PASSWORD
 # === Windows ===
 Thumbs.db
 ehthumbs.db
+
+# Django environment file
+.env
