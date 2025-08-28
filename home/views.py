@@ -1,7 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import reverse, reverse_lazy
+from django.contrib import messages
+
+from django.shortcuts import render, redirect
+
 from django.views import View
 from .forms import ContactForm
+from django.core.mail import EmailMessage
+
+from django.conf import settings
+
+
 
 class Homepage(View):
     template_name = 'home/home.html'
@@ -37,9 +47,45 @@ class ContactPage(View):
 
     def get(self, request):
         form = ContactForm()
-
         return render(request, self.template_name, {'form': form})
 
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            phone = form.cleaned_data['phone']
+            email = form.cleaned_data['email']
+            plan = form.cleaned_data['plan']
+            message = form.cleaned_data['message']
+
+            email_body = f"""
+            Nueva solicitud de contacto:
+
+            Nombre: {name}
+            Teléfono: {phone}
+            Correo Electrónico: {email}
+            Plan Seleccionado: {plan}
+            Mensaje:
+            {message}
+            """
+
+            try:
+                msg = EmailMessage(
+                    subject=f'Solicitud de contacto de {name}',
+                    body=email_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[settings.EMAIL_HOST_USER],
+                    reply_to=[email],
+                )
+                msg.send()
+                return redirect(reverse_lazy('home:thanks'))
+
+
+            except Exception as e:
+                messages.error(request, 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.')
+                print(f"Error sending email: {e}")
+
+        return render(request, self.template_name, {'form': form})
 
 class PlanPage(View):
     template_name = 'home/plan.html'
@@ -59,3 +105,11 @@ class PlanPage(View):
 
         context = {'plans': plans}
         return render(request, self.template_name, context)
+
+
+class ThanksPage(View):
+    template_name = 'home/thanks.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+

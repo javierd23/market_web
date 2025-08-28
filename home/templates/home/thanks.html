@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 relative overflow-hidden">
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+  <div class="bg-white shadow-lg rounded-2xl p-8 text-center max-w-md animate__animated animate__zoomIn">
+    <h1 class="text-3xl font-bold text-green-600 mb-4 animate__animated animate__fadeInDown">¡Gracias!</h1>
+    <p class="text-gray-700 mb-6 animate__animated animate__fadeInUp">
+      Tu solicitud ha sido enviada <span class="font-semibold">exitosamente</span>.
+    </p>
+
+    <a href="{% url 'home:home' %}" class="inline-block animate__animated animate__bounce mt-4">
+      <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
+        Volver al inicio
+      </button>
+    </a>
+  </div>
+</section>
+
+<!-- Confetti JS -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const duration = 3000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
+    }, 250);
+  });
+</script>
+
+<!-- Animate.css for smooth entrance -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}

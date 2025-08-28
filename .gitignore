@@ -1,11 +1,39 @@
-# Django #
-*.log *.pot *.pyc __pycache__/ db.sqlite3 media/ staticfiles/
-# Environments #
-.env venv/ ENV/ env/ .venv/
-# JetBrains IDE #
-.idea/
-# OS generated files #
-.DS_Store
-Thumbs.db
+# === Python general ===
+__pycache__/
+*.py[cod]
+*.so
+*.log
 
+# === Django specific ===
+db.sqlite3
+*.sqlite3
 .env
+*.pot
+*.pyc
+
+# === Virtual environments ===
+venv/
+env/
+ENV/
+.venv/
+
+# === Django migrations (optional, unless you're sharing them) ===
+**/migrations/
+!**/migrations/__init__.py
+
+# === Static & media files (if auto-generated) ===
+staticfiles/
+media/
+EMAIL_HOST_PASSWORD
+# === VS Code ===
+.vscode/
+
+# === PyCharm ===
+.idea/
+
+# === macOS ===
+.DS_Store
+
+# === Windows ===
+Thumbs.db
+ehthumbs.db
