@@ -113,3 +113,14 @@ class ThanksPage(View):
         return render(request, self.template_name)
 
 
+#this is for 404 https and 500 https.
+
+from django.shortcuts import render
+
+def my_custom_page_not_found_view(request, exception):
+    return render(request, "home/404.html", {}, status=404)
+
+def my_custom_error_view(request):
+    return render(request, "home/500.html", {}, status=500)
+
+
