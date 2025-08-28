@@ -167,19 +167,19 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-gray-50 border-t border-gray-200 transition-transform duration-500 ease-in-out">
       <a href="{% url 'home:home' %}"
-         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:home' %}text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+         class="block py-5 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:home' %}text-blue-500{% else %}text-blue-800 hover:text-blue-500{% endif %}">
         Inicio
       </a>
       <a href="{% url 'home:contact' %}"
-         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:contact' %}text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+         class="block py-5 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:contact' %}text-blue-500{% else %}text-blue-800 hover:text-blue-500{% endif %}">
         Contactos
       </a>
       <a href="{% url 'home:plan' %}"
-         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:plan' %}text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+         class="block py-5 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:plan' %}text-blue-500{% else %}text-blue-800 hover:text-blue-500{% endif %}">
         Planes
       </a>
       <a href="{% url 'home:about' %}"
-         class="block py-3 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:about' %}text-blue-500{% else %}text-gray-800 hover:text-blue-500{% endif %}">
+         class="block py-5 text-lg font-medium nav-link {% if request.resolver_match.url_name == 'home:about' %}text-blue-500{% else %}text-blue-800 hover:text-blue-500{% endif %}">
         Nosotros
       </a>
     </div>
