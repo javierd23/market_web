@@ -8,10 +8,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+      spacing: {
+        '17': '4.25rem', // You can also add it to the spacing scale
+      },
+      height: {
+        '17': '4.25rem', // This creates the h-17 class
       },
     },
   },
   plugins: [],
-}
+};

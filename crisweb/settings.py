@@ -29,7 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['carlos23.pythonanywhere.com', 'fastconnectrd.com', 'www.fastconnecrd.com']
+ALLOWED_HOSTS = ['www.fastconnectrd.com', 'fastconnectrd.com']
 
 
 # Application definition
