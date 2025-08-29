@@ -231,6 +231,16 @@
                 <span class="text-right w-1/2">{{ plan.subida }}</span>
               </li>
               <li class="flex items-center">
+                <span class="font-medium w-1/2">Fibra óptica:</span>
+                <span class="text-right w-1/2">
+                  {% if plan.Fibra_óptica %}
+                    <span class="text-green-500">&#x2714;</span>
+                  {% else %}
+                    <span class="text-red-500">&#x2718;</span>
+                  {% endif %}
+                </span>
+              </li>
+              <li class="flex items-center">
                 <span class="font-medium w-1/2">Latencia Baja:</span>
                 <span class="text-right w-1/2">
                   {% if plan.latencia_baja %}
