@@ -1,30 +1,46 @@
 <!DOCTYPE html>
+{% comment %}
+  Self-contained on purpose: when the server fails it may not be able to load the
+  stylesheet or other templates, so this page only uses inline styles.
+{% endcomment %}
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>500 - Error del Servidor</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>500 · Error del servidor · FastConnect</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at 50% 30%, #13275566, transparent 60%), #030817;
+      color: #cbd5e1; text-align: center;
+    }
+    .code {
+      font-size: clamp(6rem, 22vw, 10rem); font-weight: 800; line-height: 1; letter-spacing: -0.04em;
+      background: linear-gradient(100deg, #7deaff, #5996ff 45%, #7deaff 90%); background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shine 3.5s ease-in-out infinite;
+    }
+    h1 { margin-top: 16px; color: #fff; font-size: clamp(1.4rem, 4vw, 1.9rem); }
+    p { margin: 16px auto 0; max-width: 28rem; color: #94a3b8; line-height: 1.6; }
+    a {
+      display: inline-block; margin-top: 36px; padding: 14px 28px; border-radius: 999px;
+      background: linear-gradient(135deg, #1d53f0, #3372fb 55%, #0fbcdc); color: #fff;
+      font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px -10px #1d53f0b3;
+      transition: transform .3s;
+    }
+    a:hover { transform: translateY(-2px); }
+    @keyframes shine { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
+    @media (prefers-reduced-motion: reduce) { .code { animation: none; } }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen">
-
-  <div class="text-center space-y-6">
-    <!-- Big 500 -->
-    <h1 class="text-9xl font-bold text-red-600">500</h1>
-    <p class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-      ¡Ups! Algo salió mal en nuestro servidor.
-    </p>
-    <p class="text-gray-600 dark:text-gray-400">
-      No es culpa tuya. Estamos trabajando para solucionarlo lo antes posible.
-    </p>
-
-    <!-- Back to home button -->
-    <div class="mt-6">
-      <a href="{% url 'home:home' %}"
-         class="px-6 py-3 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition">
-        🔄 Volver a la página principal
-      </a>
-    </div>
-  </div>
-
+<body>
+  <main>
+    <div class="code">500</div>
+    <h1>¡Ups! Algo salió mal en nuestro servidor.</h1>
+    <p>No es culpa tuya. Estamos trabajando para solucionarlo lo antes posible.</p>
+    <a href="/">Volver a la página principal</a>
+  </main>
 </body>
 </html>

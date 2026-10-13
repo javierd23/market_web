@@ -1,260 +1,172 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Planes de Internet · FastConnect{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
-<div class="relative w-full h-[70vh] overflow-hidden">
-  <!-- Background Video with Image Fallback -->
-  <img src="{% static 'home/plan.jpg' %}"
-     alt="Background"
-     class="absolute inset-0 w-full h-full object-cover">
 
-  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
+<!-- Hero -->
+<section class="relative isolate overflow-hidden bg-night-950 pb-24 pt-40 sm:pb-32 sm:pt-48">
+  <img src="{% static 'home/plan.jpg' %}" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-night-950/70 via-night-950/80 to-night-950"></div>
+  <div class="bg-grid absolute inset-0 -z-10"></div>
+  <div class="absolute left-1/2 top-1/3 -z-10 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-brand-600/30 blur-[120px]"></div>
+  <span class="streak top-[35%]" style="animation-delay:.8s"></span>
+  <span class="streak top-[70%]" style="animation-delay:3.4s; width:30%"></span>
 
-  <!-- Hero Content -->
-  <div class="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight drop-shadow-lg"
-        data-aos="fade-up" data-aos-duration="1000">
-      Planes de Internet
+  <div class="container-page text-center">
+    <span class="eyebrow-dark hero-fade">6 planes · Fibra óptica</span>
+    <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-tight !text-white sm:text-6xl">
+      <span class="hero-word" style="--i:0">Planes</span>
+      <span class="hero-word" style="--i:1">de</span>
+      <span class="hero-word text-gradient" style="--i:2">Internet</span>
     </h1>
-    <p class="max-w-2xl text-base sm:text-lg md:text-xl font-light mb-6"
-       data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+    <p class="hero-fade mx-auto mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl" style="--delay:450">
       Escoge el plan que mejor se adapte a tus necesidades. Conexión estable, rápida y confiable.
     </p>
-    <a href="#comparison"
-      class="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-base sm:text-lg font-bold uppercase transition duration-300 transform hover:scale-105 shadow-xl"
-      data-aos="fade-up" data-aos-duration="1400" data-aos-delay="400">
-      Comparar Planes
-    </a>
-  </div>
-</div>
-
-<!-- Pricing Cards Section -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-      <!-- Plan Básico -->
-      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true">
-        <h3 class="text-2xl text-gray-900 font-bold mb-4">Plan Básico</h3>
-        <p class="text-gray-600 mb-6">Perfecto para navegación básica y streaming en HD.</p>
-        <p class="text-4xl text-gray-900 font-extrabold mb-6">RD$800.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6 text-gray-700">
-          <li>10 Mbps de velocidad</li>
-          <li>Soporte 24/7</li>
-          <li>5 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Básico%2C%20de%2010%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-          Elegir Plan
-        </a>
-      </div>
-
-      <!-- Plan Intermedio -->
-      <div class="relative bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-2xl p-8 text-center text-white ring-4 ring-blue-400 hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="200">
-        <div class="absolute top-0 right-0 -mt-4 -mr-4 bg-yellow-400 text-yellow-900 text-xs font-bold py-1 px-4 rounded-full shadow-lg transform rotate-6">
-          Más Popular
-        </div>
-        <h3 class="text-2xl font-bold mb-4">Plan Intermedio</h3>
-        <p class="text-blue-100 mb-6">Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas.</p>
-        <p class="text-4xl font-extrabold mb-6">RD$1,500.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6">
-          <li>80 Mbps de velocidad</li>
-          <li>Soporte 24/7</li>
-          <li>40 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Intermedio%2C%20de%2080%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-white text-blue-600 font-semibold hover:bg-gray-300 transition">
-          Elegir Plan
-        </a>
-      </div>
-
-      <!-- Plan Esencial -->
-      <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="100">
-        <h3 class="text-2xl text-gray-900 font-bold mb-4">Plan Esencial</h3>
-        <p class="text-gray-600 mb-6">Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo.</p>
-        <p class="text-4xl text-gray-900 font-extrabold mb-6">RD$1,000.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6 text-gray-700">
-          <li>50 Mbps de velocidad</li>
-          <li>Soporte 24/7</li>
-          <li>25 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Esencial%2C%20de%2050%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-          Elegir Plan
-        </a>
-      </div>
-
-      <!-- Plan Avanzado -->
-      <div class="bg-white bg-gradient-to-br from-white-400 to-white-600 rounded-2xl shadow-2xl order-4 border-yellow-400 p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="500">
-        <h3 class="text-2xl text-gray-900 font-bold mb-4">Plan Avanzado</h3>
-        <p class="text-gray-600 mb-6">Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición.</p>
-        <p class="text-4xl text-gray-900 font-extrabold mb-6">RD$2,000.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6 text-gray-700">
-          <li>100 Mbps de velocidad</li>
-          <li>Soporte 24/7</li>
-          <li>50 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Avanzado%2C%20de%20100%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-          Elegir Plan
-        </a>
-      </div>
-
-      <!-- Plan Ultra -->
-      <div class="bg-yellow-500 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl shadow-2xl order-4 border-yellow-400 p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="500">
-        <h3 class="text-2xl font-bold mb-4">Plan Ultra</h3>
-        <p class="text-gray-600 mb-6">La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming.</p>
-        <p class="text-4xl font-extrabold mb-6">RD$3,400.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6 text-gray-700">
-          <li>200 Mbps de velocidad</li>
-          <li>Soporte VIP 24/7</li>
-          <li>100 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Ultra%2C%20de%20200%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-          Elegir Plan
-        </a>
-      </div>
-
-      <!-- Plan Premium -->
-      <div class="bg-white bg-gradient-to-br from-white-400 to-white-600 rounded-2xl shadow-2xl order-4 border-yellow-400 p-8 text-center hover:scale-105 transition transform duration-300" data-aos="fade-up" data-aos-once="true" data-aos-delay="500">
-        <h3 class="text-2xl text-gray-900 font-bold mb-4">Plan Premium</h3>
-        <p class="text-gray-600 mb-6">Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones.</p>
-        <p class="text-4xl text-gray-900 font-extrabold mb-6">RD$2,500.00<span class="text-lg font-medium">/mes</span></p>
-        <ul class="space-y-3 mb-6 text-gray-700">
-          <li>150 Mbps de velocidad</li>
-          <li>Soporte 24/7</li>
-          <li>75 Mbps de subida</li>
-        </ul>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20plan%20Premium%2C%20de%20150%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
-           target="_blank"
-           class="block w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-          Elegir Plan
-        </a>
-      </div>
-
+    <div class="hero-fade mt-9 flex flex-col justify-center gap-3 sm:flex-row" style="--delay:600">
+      <a href="#planes" class="btn-primary">Ver planes</a>
+      <a href="#comparison" class="btn-ghost-dark">Comparar planes</a>
     </div>
   </div>
 </section>
 
-<!-- Comparison Table Section -->
-<section id="comparison" class="py-16 bg-white">
-  <div class="max-w-6xl mx-auto px-6 lg:px-8">
-    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10" data-aos="fade-up" data-aos-once="true">Comparación de Planes</h2>
+<!-- Pricing cards -->
+<section id="planes" class="relative scroll-mt-20 py-20 sm:py-28">
+  <div class="container-page">
+    <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {% include "home/partials/plan_card.html" with name="Básico" speed="10" upload="5" pct=5 price="800.00" code="pb" support="24/7" detailed=True desc="Perfecto para navegación básica y streaming en HD." delay=0 %}
+      {% include "home/partials/plan_card.html" with name="Esencial" speed="50" upload="25" pct=25 price="1,000.00" code="pe" support="24/7" detailed=True desc="Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo." delay=100 %}
+      {% include "home/partials/plan_card.html" with name="Intermedio" speed="80" upload="40" pct=40 price="1,500.00" code="pi" support="24/7" low_latency=True featured=True detailed=True desc="Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas." delay=200 %}
+      {% include "home/partials/plan_card.html" with name="Avanzado" speed="100" upload="50" pct=50 price="2,000.00" code="pa" support="24/7" low_latency=True detailed=True desc="Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición." delay=0 %}
+      {% include "home/partials/plan_card.html" with name="Premium" speed="150" upload="75" pct=75 price="2,500.00" code="pp" support="24/7" low_latency=True detailed=True desc="Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones." delay=100 %}
+      {% include "home/partials/plan_card.html" with name="Ultra" speed="200" upload="100" pct=100 price="3,400.00" code="pu" support="VIP 24/7" low_latency=True detailed=True desc="La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming." delay=200 %}
+    </div>
+  </div>
+</section>
 
-    <!-- Desktop/Tablet Comparison Table -->
-    <div class="hidden md:block overflow-x-auto shadow-xl rounded-lg border border-gray-200" data-aos="fade-up" data-aos-once="true">
-      <table class="min-w-full">
-        <thead class="bg-blue-600 text-white">
-          <tr>
-            <th class="px-4 py-3 text-left">Características</th>
-            <th class="px-4 py-3">Básico</th>
-            <th class="px-4 py-3">Esencial</th>
-            <th class="px-4 py-3 bg-blue-700">Intermedio</th>
-            <th class="px-4 py-3">Avanzado</th>
-            <th class="px-4 py-3">Premium</th>
-            <th class="px-4 py-3">Ultra</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-          <tr class="bg-gray-50">
-            <td class="px-4 py-3 font-medium">Velocidad</td>
-            <td class="text-center">10 Mbps</td>
-            <td class="text-center">50 Mbps</td>
-            <td class="text-center font-bold">80 Mbps</td>
-            <td class="text-center">100 Mbps</td>
-            <td class="text-center">150 Mbps</td>
-            <td class="text-center">200 Mbps</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-3 font-medium">Soporte</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center font-bold text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="px-4 py-3 font-medium">Subida</td>
-            <td class="text-center">5 Mbps</td>
-            <td class="text-center">25 Mbps</td>
-            <td class="text-center font-bold">40 Mbps</td>
-            <td class="text-center">50 Mbps</td>
-            <td class="text-center">75 Mbps</td>
-            <td class="text-center">100 Mbps</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-3 font-medium">Fibra óptica</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center font-bold text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-          </tr>
-          <tr>
-            <td class="px-4 py-3 font-medium">Latencia Baja</td>
-            <td class="text-center text-red-500">&#x2718;</td>
-            <td class="text-center text-red-500">&#x2718;</td>
-            <td class="text-center font-bold text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-            <td class="text-center text-green-500">&#x2714;</td>
-          </tr>
-        </tbody>
-      </table>
+<!-- Which plan is for you -->
+<section class="bg-white py-20 sm:py-28">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Te ayudamos a elegir</span>
+      <h2 class="section-title">¿Cuál es para ti?</h2>
+      <p class="section-lead">Una guía rápida según cómo usas el internet en casa.</p>
     </div>
 
-    <!-- Mobile-only Comparison List -->
-    <div class="md:hidden space-y-8" data-aos="fade-up" data-aos-once="true" data-aos-delay="200">
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <a href="#planes" class="card card-hover group block" data-reveal="up" data-delay="0">
+        <span class="text-3xl" aria-hidden="true">🌐</span>
+        <h3 class="mt-4 text-lg font-semibold">Navegar y redes</h3>
+        <p class="mt-1 text-sm text-slate-500">Correo, redes sociales y videos en HD.</p>
+        <p class="mt-5 text-sm font-semibold text-brand-700">Básico · 10 Mbps</p>
+      </a>
+      <a href="#planes" class="card card-hover group block" data-reveal="up" data-delay="100">
+        <span class="text-3xl" aria-hidden="true">💻</span>
+        <h3 class="mt-4 text-lg font-semibold">Trabajo desde casa</h3>
+        <p class="mt-1 text-sm text-slate-500">Videollamadas y varias apps a la vez.</p>
+        <p class="mt-5 text-sm font-semibold text-brand-700">Esencial · 50 Mbps</p>
+      </a>
+      <a href="#planes" class="card card-hover group block" data-reveal="up" data-delay="200">
+        <span class="text-3xl" aria-hidden="true">👨‍👩‍👧‍👦</span>
+        <h3 class="mt-4 text-lg font-semibold">Toda la familia</h3>
+        <p class="mt-1 text-sm text-slate-500">Streaming en 4K en varios dispositivos.</p>
+        <p class="mt-5 text-sm font-semibold text-brand-700">Intermedio · 80 Mbps</p>
+      </a>
+      <a href="#planes" class="card card-hover group block" data-reveal="up" data-delay="300">
+        <span class="text-3xl" aria-hidden="true">🎮</span>
+        <h3 class="mt-4 text-lg font-semibold">Gaming y 4K/8K</h3>
+        <p class="mt-1 text-sm text-slate-500">Baja latencia y máxima velocidad.</p>
+        <p class="mt-5 text-sm font-semibold text-brand-700">Avanzado a Ultra · 100–200 Mbps</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section id="comparison" class="scroll-mt-20 py-20 sm:py-28">
+  <div class="container-page max-w-6xl">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Comparación</span>
+      <h2 class="section-title">Comparación de planes</h2>
+      <p class="section-lead">Todas las características, lado a lado.</p>
+    </div>
+
+    <!-- Desktop / tablet table -->
+    <div class="mt-14 hidden overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/5 md:block" data-reveal="up">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <caption class="sr-only">Comparación de características de los planes</caption>
+          <thead>
+            <tr class="border-b border-slate-200">
+              <th scope="col" class="px-6 py-5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Características</th>
+              {% for plan in plans %}
+              <th scope="col" class="px-4 py-5 text-center font-display text-base font-semibold {% if plan.name == 'Intermedio' %}bg-night-900 text-white{% else %}text-slate-900{% endif %}">
+                {% if plan.name == 'Intermedio' %}<span class="mb-1 block text-[0.65rem] font-bold uppercase tracking-wider text-amber-300">Más popular</span>{% endif %}
+                {{ plan.name }}
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="transition hover:bg-slate-50/70">
+              <th scope="row" class="px-6 py-4 text-left font-medium text-slate-700">Velocidad</th>
+              {% for plan in plans %}
+              <td class="px-4 py-4 text-center font-semibold {% if plan.name == 'Intermedio' %}bg-night-900 text-white{% else %}text-slate-900{% endif %}">{{ plan.velocidad }}</td>
+              {% endfor %}
+            </tr>
+            <tr class="transition hover:bg-slate-50/70">
+              <th scope="row" class="px-6 py-4 text-left font-medium text-slate-700">Subida</th>
+              {% for plan in plans %}
+              <td class="px-4 py-4 text-center {% if plan.name == 'Intermedio' %}bg-night-900 text-slate-200{% else %}text-slate-600{% endif %}">{{ plan.subida }}</td>
+              {% endfor %}
+            </tr>
+            <tr class="transition hover:bg-slate-50/70">
+              <th scope="row" class="px-6 py-4 text-left font-medium text-slate-700">Soporte</th>
+              {% for plan in plans %}
+              <td class="px-4 py-4 text-center {% if plan.name == 'Intermedio' %}bg-night-900 text-slate-200{% else %}text-slate-600{% endif %}">
+                {% if 'VIP' in plan.soporte %}<span class="rounded-full bg-night-900 px-2.5 py-1 text-xs font-bold text-glow-300">{{ plan.soporte }}</span>{% else %}{{ plan.soporte }}{% endif %}
+              </td>
+              {% endfor %}
+            </tr>
+            <tr class="transition hover:bg-slate-50/70">
+              <th scope="row" class="px-6 py-4 text-left font-medium text-slate-700">Fibra óptica</th>
+              {% for plan in plans %}
+              <td class="px-4 py-4 text-center {% if plan.name == 'Intermedio' %}bg-night-900{% endif %}">
+                {% include "home/partials/check.html" with ok=plan.Fibra_óptica %}
+              </td>
+              {% endfor %}
+            </tr>
+            <tr class="transition hover:bg-slate-50/70">
+              <th scope="row" class="px-6 py-4 text-left font-medium text-slate-700">Latencia baja</th>
+              {% for plan in plans %}
+              <td class="px-4 py-4 text-center {% if plan.name == 'Intermedio' %}bg-night-900{% endif %}">
+                {% include "home/partials/check.html" with ok=plan.latencia_baja %}
+              </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile list -->
+    <div class="mt-12 space-y-4 md:hidden">
       {% for plan in plans %}
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-2xl font-bold text-blue-600 mb-4">{{ plan.name }}</h3>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-center">
-                <span class="font-medium w-1/2">Velocidad:</span>
-                <span class="text-right w-1/2">{{ plan.velocidad }}</span>
-              </li>
-              <li class="flex items-center">
-                <span class="font-medium w-1/2">Soporte:</span>
-                <span class="text-right w-1/2">{{ plan.soporte }}</span>
-              </li>
-              <li class="flex items-center">
-                <span class="font-medium w-1/2">Subida:</span>
-                <span class="text-right w-1/2">{{ plan.subida }}</span>
-              </li>
-              <li class="flex items-center">
-                <span class="font-medium w-1/2">Fibra óptica:</span>
-                <span class="text-right w-1/2">
-                  {% if plan.Fibra_óptica %}
-                    <span class="text-green-500">&#x2714;</span>
-                  {% else %}
-                    <span class="text-red-500">&#x2718;</span>
-                  {% endif %}
-                </span>
-              </li>
-              <li class="flex items-center">
-                <span class="font-medium w-1/2">Latencia Baja:</span>
-                <span class="text-right w-1/2">
-                  {% if plan.latencia_baja %}
-                    <span class="text-green-500">&#x2714;</span>
-                  {% else %}
-                    <span class="text-red-500">&#x2718;</span>
-                  {% endif %}
-                </span>
-              </li>
-            </ul>
-          </div>
+      <div class="card !p-6 {% if plan.name == 'Intermedio' %}plan-featured{% endif %}" data-reveal="up">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-semibold">{{ plan.name }}</h3>
+          <span class="font-display text-lg font-bold {% if plan.name == 'Intermedio' %}text-glow-300{% else %}text-brand-700{% endif %}">{{ plan.velocidad }}</span>
+        </div>
+        <dl class="mt-4 divide-y text-sm {% if plan.name == 'Intermedio' %}divide-white/10 text-slate-300{% else %}divide-slate-100 text-slate-600{% endif %}">
+          <div class="flex items-center justify-between py-2.5"><dt>Subida</dt><dd class="font-medium">{{ plan.subida }}</dd></div>
+          <div class="flex items-center justify-between py-2.5"><dt>Soporte</dt><dd class="font-medium">{{ plan.soporte }}</dd></div>
+          <div class="flex items-center justify-between py-2.5"><dt>Fibra óptica</dt><dd>{% include "home/partials/check.html" with ok=plan.Fibra_óptica %}</dd></div>
+          <div class="flex items-center justify-between py-2.5"><dt>Latencia baja</dt><dd>{% include "home/partials/check.html" with ok=plan.latencia_baja %}</dd></div>
+        </dl>
+      </div>
       {% endfor %}
     </div>
-
   </div>
 </section>
 {% endblock %}

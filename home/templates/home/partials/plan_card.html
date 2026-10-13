@@ -1,0 +1,76 @@
+{% comment %}
+  One pricing card. Used on the home and plans pages.
+  Params: name, speed, upload, price, desc, pct (speed as % of the fastest plan, for the meter),
+          code (value of the plan in the contact form), support, low_latency, featured, detailed, delay
+{% endcomment %}
+<article data-reveal="up" data-delay="{{ delay|default:0 }}" data-spotlight
+         class="group card card-hover spotlight flex h-full flex-col {% if featured %}plan-featured text-slate-300 lg:-my-4 lg:py-11{% endif %}">
+
+  <header class="flex items-center justify-between gap-3">
+    <h3 class="text-lg font-semibold {% if not featured %}text-slate-900{% endif %}">Plan {{ name }}</h3>
+    {% if featured %}
+      <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-300 to-amber-400 px-3 py-1 text-xs font-bold text-amber-950 shadow-lg shadow-amber-500/30">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Más popular
+      </span>
+    {% elif support == 'VIP 24/7' %}
+      <span class="rounded-full bg-night-900 px-3 py-1 text-xs font-bold text-glow-300">VIP</span>
+    {% endif %}
+  </header>
+
+  <div class="mt-6 flex items-baseline gap-1.5">
+    <span class="font-display text-5xl font-extrabold tracking-tight {% if featured %}text-white{% else %}text-slate-900{% endif %}">{{ speed }}</span>
+    <span class="text-lg font-semibold {% if featured %}text-glow-300{% else %}text-brand-600{% endif %}">Mbps</span>
+  </div>
+  <div class="speed-bar mt-4" style="--speed: {{ pct }}" role="img" aria-label="{{ speed }} Mbps de bajada"><span></span></div>
+
+  <p class="mt-5 text-sm leading-relaxed {% if featured %}text-slate-300{% else %}text-slate-500{% endif %}">{{ desc }}</p>
+
+  {% if detailed %}
+  <ul class="mt-6 space-y-3 text-sm">
+    <li class="flex items-center gap-3">
+      <svg class="h-5 w-5 shrink-0 {% if featured %}text-glow-400{% else %}text-brand-600{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      {{ speed }} Mbps de bajada
+    </li>
+    <li class="flex items-center gap-3">
+      <svg class="h-5 w-5 shrink-0 {% if featured %}text-glow-400{% else %}text-brand-600{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      {{ upload }} Mbps de subida
+    </li>
+    <li class="flex items-center gap-3">
+      <svg class="h-5 w-5 shrink-0 {% if featured %}text-glow-400{% else %}text-brand-600{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      Soporte {{ support }}
+    </li>
+    <li class="flex items-center gap-3">
+      <svg class="h-5 w-5 shrink-0 {% if featured %}text-glow-400{% else %}text-brand-600{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+      Fibra óptica
+    </li>
+    {% if low_latency %}
+    <li class="flex items-center gap-3">
+      <svg class="h-5 w-5 shrink-0 {% if featured %}text-glow-400{% else %}text-brand-600{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Latencia baja, ideal para gaming
+    </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+
+  <div class="mt-auto pt-8">
+    <div class="flex items-baseline gap-1 border-t pt-6 {% if featured %}border-white/10{% else %}border-slate-100{% endif %}">
+      <span class="text-sm font-medium {% if featured %}text-slate-400{% else %}text-slate-500{% endif %}">RD$</span>
+      <span class="font-display text-3xl font-bold {% if featured %}text-white{% else %}text-slate-900{% endif %}">{{ price }}</span>
+      <span class="text-sm {% if featured %}text-slate-400{% else %}text-slate-500{% endif %}">/mes</span>
+    </div>
+
+    <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20{{ name|urlencode }}%2C%20de%20{{ speed }}%20Mbps%2C%20¿cuándo%20puedo%20agendar%20mi%20instalación%3F"
+       target="_blank" rel="noopener"
+       class="mt-5 w-full {% if featured %}btn-primary{% else %}btn-outline group-hover:border-brand-400{% endif %}">
+      Solicitar ahora
+      <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    {% if detailed %}
+    <a href="{% url 'home:contact' %}?plan={{ code }}#formulario"
+       class="mt-3 block text-center text-sm font-medium transition {% if featured %}text-slate-400 hover:text-white{% else %}text-slate-500 hover:text-brand-700{% endif %}">
+      o envíanos un mensaje
+    </a>
+    {% endif %}
+  </div>
+</article>

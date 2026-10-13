@@ -1,135 +1,150 @@
 {% extends "base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
+
+{% block title %}Contactos · FastConnect{% endblock %}
 
 {% block content %}
-<!-- Page Header -->
-<section class="relative h-96 flex flex-col justify-center items-center text-center overflow-hidden">
-  <!-- Video Background -->
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover">
+
+<!-- Hero -->
+<section class="relative isolate overflow-hidden bg-night-950 pb-36 pt-40 sm:pb-44 sm:pt-48">
+  <video autoplay muted loop playsinline aria-hidden="true" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-40">
     <source src="{% static 'home/backg.mp4' %}" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-night-950/60 via-night-950/80 to-night-950"></div>
+  <div class="bg-grid absolute inset-0 -z-10"></div>
+  <div class="absolute left-1/2 top-1/3 -z-10 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-brand-600/25 blur-[120px]"></div>
+  <span class="streak top-[45%]" style="animation-delay:1s"></span>
 
-  <!-- Overlay to make text readable -->
-  <div class="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-
-  <!-- Text Content -->
-  <div class="relative z-10 px-6">
-    <h1 class="text-4xl md:text-5xl font-bold text-white animate-fade-in">Contáctanos</h1>
-    <p class="text-white mt-3 md:mt-5 text-lg animate-fade-in delay-150">Estamos aquí para ayudarte en lo que necesites</p>
+  <div class="container-page text-center">
+    <span class="eyebrow-dark hero-fade">Respondemos rápido</span>
+    <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-tight !text-white sm:text-6xl">
+      <span class="hero-word text-gradient" style="--i:0">Contáctanos</span>
+    </h1>
+    <p class="hero-fade mx-auto mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl" style="--delay:350">
+      Estamos aquí para ayudarte en lo que necesites.
+    </p>
   </div>
 </section>
 
-<!-- Animations -->
-<style>
-@keyframes fade-in { from {opacity:0;} to {opacity:1;} }
-.animate-fade-in { animation: fade-in 1s ease-out forwards; }
-.animate-fade-in.delay-150 { animation-delay: 0.15s; }
-</style>
-
-<!-- Contact Info Section -->
-<section class="py-16 px-6 md:px-12 bg-white">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Dirección -->
-    <div class="bg-gray-50 p-6 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300 animate-slide-up">
-      <div class="flex items-center justify-center w-14 h-14 mx-auto rounded-full bg-blue-100 mb-4">
-        <!-- New Location Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
-        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
-          <ellipse cx="44.996" cy="83.309" rx="30.076" ry="6.689" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(4,219,120); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "/>
-          <path d="M 45 83.293 c -1.31 0 -2.522 -0.692 -3.188 -1.819 l -4.058 -6.864 c -8.333 -14.086 -16.203 -27.392 -18.891 -32.788 c -1.954 -4.008 -2.938 -8.287 -2.938 -12.747 C 15.925 13.043 28.968 0 45 0 c 16.032 0 29.075 13.043 29.075 29.075 c 0 4.456 -0.983 8.735 -2.922 12.717 c -0.023 0.048 -0.049 0.096 -0.074 0.143 c -2.74 5.468 -10.56 18.688 -18.836 32.678 l -4.055 6.861 C 47.522 82.601 46.31 83.293 45 83.293 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(4,136,219); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
-          <path d="M 45 42.274 c -7.843 0 -14.223 -6.38 -14.223 -14.223 S 37.157 13.828 45 13.828 c 7.842 0 14.223 6.381 14.223 14.223 S 52.842 42.274 45 42.274 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
-        </g>
-        </svg>
+<!-- Contact info cards (overlap the hero) -->
+<section class="relative z-10 -mt-24 sm:-mt-28">
+  <div class="container-page grid grid-cols-1 gap-5 md:grid-cols-3">
+    <div class="card card-hover group text-center" data-reveal="up" data-delay="0">
+      <div class="icon-tile mx-auto transition-transform duration-500 group-hover:scale-110">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
-      <h4 class="text-xl font-bold text-gray-800">Dirección</h4>
-      <p class="text-gray-600 mt-2">C.22 Sabana Perdida, Santo Domingo Norte, RD</p>
+      <h2 class="mt-5 text-lg font-semibold">Dirección</h2>
+      <p class="mt-2 text-slate-500">C.22 Sabana Perdida, Santo Domingo Norte, RD</p>
+      <a href="#location" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline">Ver en el mapa</a>
     </div>
 
-    <!-- Correo -->
-    <div class="bg-gray-50 p-6 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300 animate-slide-up delay-100">
-      <div class="flex items-center justify-center w-14 h-14 mx-auto rounded-full bg-blue-100 mb-4">
-        <!-- New Email Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
-        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
-          <circle cx="45" cy="45" r="45" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(35,91,216); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-          <path d="M 64.567 26.495 H 25.433 c -3.142 0 -5.689 2.547 -5.689 5.689 v 25.631 c 0 3.142 2.547 5.689 5.689 5.689 h 39.135 c 3.142 0 5.689 -2.547 5.689 -5.689 V 32.184 C 70.256 29.043 67.709 26.495 64.567 26.495 z M 63.343 57.47 c -0.295 0.306 -0.688 0.46 -1.081 0.46 c -0.374 0 -0.749 -0.14 -1.04 -0.419 l -9.419 -9.065 l -1.357 1.489 c -1.394 1.528 -3.378 2.404 -5.446 2.404 c -2.068 0 -4.053 -0.876 -5.446 -2.404 l -1.337 -1.467 l -9.022 9.023 c -0.292 0.293 -0.677 0.439 -1.061 0.439 s -0.768 -0.146 -1.061 -0.439 c -0.586 -0.586 -0.586 -1.535 0 -2.121 l 9.12 -9.121 L 26.63 35.754 c -0.558 -0.612 -0.514 -1.561 0.098 -2.119 c 0.613 -0.558 1.562 -0.514 2.119 0.098 l 12.924 14.18 c 0.838 0.92 1.985 1.426 3.229 1.426 s 2.392 -0.506 3.229 -1.426 l 2.422 -2.657 l 10.502 -11.522 c 0.559 -0.612 1.507 -0.655 2.119 -0.098 c 0.612 0.558 0.656 1.506 0.098 2.119 l -9.546 10.474 l 9.477 9.121 C 63.898 55.924 63.917 56.873 63.343 57.47 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
-        </g>
-        </svg>
+    <div class="card card-hover group text-center" data-reveal="up" data-delay="100">
+      <div class="icon-tile mx-auto transition-transform duration-500 group-hover:scale-110">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
       </div>
-      <h4 class="text-xl font-bold text-gray-800">Correo Electrónico</h4>
-      <p class="text-gray-600 mt-2">fastconnect000@gmail.com</p>
+      <h2 class="mt-5 text-lg font-semibold">Correo electrónico</h2>
+      <p class="mt-2 break-all text-slate-500">fastconnect000@gmail.com</p>
+      <a href="mailto:fastconnect000@gmail.com" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline">Escribir un correo</a>
     </div>
 
-    <!-- Teléfono -->
-    <div class="bg-gray-50 p-6 rounded-3xl shadow-lg text-center hover:scale-105 transition-transform duration-300 animate-slide-up delay-200">
-      <div class="flex items-center justify-center w-14 h-14 mx-auto rounded-full bg-blue-100 mb-4">
-        <!-- New Phone Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
-        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
-          <circle cx="45" cy="45" r="45" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(33,150,243); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-          <path d="M 57.332 70.088 c -1.955 0.001 -4.074 -0.313 -6.32 -0.946 c -6.303 -1.777 -12.904 -5.885 -18.586 -11.568 c -5.682 -5.682 -9.79 -12.283 -11.568 -18.586 c -1.84 -6.528 -0.978 -11.999 2.429 -15.406 c 0.124 -0.124 0.25 -0.244 0.38 -0.36 c 0.033 -0.046 0.07 -0.09 0.112 -0.131 l 1.819 -1.819 c 0.877 -0.877 2.042 -1.36 3.282 -1.36 c 1.24 0 2.405 0.483 3.282 1.36 l 6.976 6.977 c 1.809 1.809 1.809 4.754 0 6.563 L 36.149 37.8 c -0.753 0.753 -0.753 1.979 0 2.732 L 49.468 53.85 c 0.729 0.729 2.002 0.729 2.732 0 l 2.988 -2.988 c 1.809 -1.808 4.755 -1.81 6.564 -0.001 l 6.977 6.977 c 0.876 0.876 1.359 2.042 1.359 3.281 s -0.483 2.405 -1.359 3.281 l -1.819 1.819 c -0.042 0.042 -0.087 0.08 -0.133 0.114 c -0.117 0.13 -0.236 0.256 -0.36 0.379 C 64.182 68.948 61.058 70.088 57.332 70.088 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
-        </g>
-        </svg>
+    <div class="card card-hover group text-center" data-reveal="up" data-delay="200">
+      <div class="icon-tile mx-auto transition-transform duration-500 group-hover:scale-110">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </div>
-      <h4 class="text-xl font-bold text-gray-800">Teléfono</h4>
-      <p class="text-gray-600 mt-2">+1-849-491-6347</p>
-      <p class="text-gray-600 mt-2">+1-809-361-6347</p>
+      <h2 class="mt-5 text-lg font-semibold">Teléfono</h2>
+      <p class="mt-2 flex flex-col text-slate-500">
+        <a href="tel:+18494916347" class="transition hover:text-brand-700">+1-849-491-6347</a>
+        <a href="tel:+18093616347" class="transition hover:text-brand-700">+1-809-361-6347</a>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- Contact Form Section -->
-<section class="py-16 px-6 md:px-12 bg-gray-50">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+<!-- Form -->
+<section id="formulario" class="scroll-mt-24 py-20 sm:py-28">
+  <div class="container-page grid gap-8 lg:grid-cols-5 lg:gap-10">
 
+    <!-- Side panel -->
+    <aside class="relative isolate overflow-hidden rounded-[2rem] bg-night-900 p-8 text-slate-300 sm:p-10 lg:col-span-2" data-reveal="left">
+      <img src="{% static 'home/call.jpg' %}" alt="" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-25">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-t from-night-950 via-night-900/90 to-night-900/60"></div>
+      <div class="absolute -right-16 -top-16 -z-10 h-56 w-56 rounded-full bg-brand-600/40 blur-3xl"></div>
 
-    <!-- Image Column -->
-    <div class="flex justify-center md:justify-end animate-slide-up delay-100">
-      <img src="{% static 'home/call.jpg' %}" alt="Llamada" class="rounded-xl shadow-lg w-full max-w-md object-cover">
-    </div>
+      <span class="eyebrow-dark">Formulario</span>
+      <h2 class="mt-5 text-3xl font-bold !text-white">Envíanos un mensaje</h2>
+      <p class="mt-3 leading-relaxed">
+        Cuéntanos qué plan te interesa y te contactaremos para agendar tu instalación.
+      </p>
 
-    <!-- Contact Form -->
-    <div class="animate-slide-up">
-      <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center md:text-left">Envíanos un Mensaje</h2>
-      <form method="POST" action="{% url 'home:contact' %}" class="space-y-6 bg-white p-8 rounded-xl shadow-lg animate-fade-in">
-          {% csrf_token %}
+      <ul class="mt-10 space-y-5">
+        <li class="flex items-start gap-4">
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-glow-300">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <span><span class="block font-semibold text-white">Soporte 24/7</span><span class="text-sm">Cualquier día, a cualquier hora.</span></span>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-glow-300">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </span>
+          <span><span class="block font-semibold text-white">Instalación rápida</span><span class="text-sm">Te conectamos en tiempo récord.</span></span>
+        </li>
+      </ul>
 
-          <!-- This section will display any general form errors -->
-          {% if form.non_field_errors %}
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
-                  <p class="font-bold">¡Lo sentimos!</p>
-                  <p class="text-sm">Por favor, corrija los siguientes errores:</p>
-                  <ul>
-                      {% for error in form.non_field_errors %}
-                          <li>{{ error }}</li>
-                      {% endfor %}
-                  </ul>
-              </div>
-          {% endif %}
+      <a href="https://wa.me/18494916347?text=Quiero%20saber%20más%20acerca%20de%20sus%20planes%20y%20servicios" target="_blank" rel="noopener"
+         class="mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-lg shadow-emerald-600/30 transition hover:-translate-y-0.5 hover:bg-[#1fbe5a]">
+        ¿Prefieres WhatsApp? Escríbenos
+      </a>
+    </aside>
 
-          {{ form|crispy }}
+    <!-- Form card -->
+    <div class="card !p-6 sm:!p-10 lg:col-span-3" data-reveal="right">
+      <form method="POST" action="{% url 'home:contact' %}" data-loading-form class="space-y-6">
+        {% csrf_token %}
 
-          <button type="submit"
-              class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
-              Enviar
-          </button>
+        {% if form.non_field_errors %}
+        <div class="rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-red-700" role="alert">
+          <p class="font-semibold">¡Lo sentimos!</p>
+          <p class="text-sm">Por favor, corrija los siguientes errores:</p>
+          <ul class="mt-2 list-inside list-disc text-sm">
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {% for field in form %}
+          <div class="field {% if field.errors %}has-error{% endif %} {% if field.name == 'message' %}sm:col-span-2{% endif %}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn-primary w-full disabled:cursor-wait disabled:opacity-80">
+          <svg data-spinner class="hidden h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-opacity=".3" stroke-width="3"/><path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          <span data-label>Enviar mensaje</span>
+        </button>
+        <p class="text-center text-xs text-slate-400">Te responderemos lo antes posible.</p>
       </form>
     </div>
-
   </div>
 </section>
 
-<!-- Google Maps Section -->
-<section id="location" class="mt-16 py-12">
-  <div class="container mx-auto px-4 text-center">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 animate-slide-up">Encuéntranos</h2>
-    <div class="w-full h-96 rounded-xl shadow-lg overflow-hidden animate-fade-in">
+<!-- Map -->
+<section id="location" class="scroll-mt-24">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Ubicación</span>
+      <h2 class="section-title">Encuéntranos</h2>
+    </div>
+
+    <div class="mt-12 overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-2 shadow-xl shadow-slate-900/5" data-reveal="zoom">
       <iframe
+        title="Mapa de la ubicación de FastConnect"
         src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3782.544843773963!2d-69.85718152480757!3d18.54945948254973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDMyJzU4LjEiTiA2OcKwNTEnMTYuNiJX!5e0!3m2!1sen!2sdo!4v1756298998125!5m2!1sen!2sdo"
-        width="100%"
-        height="100%"
+        class="h-[26rem] w-full rounded-[1.6rem]"
         style="border:0;"
         allowfullscreen=""
         loading="lazy"
@@ -137,23 +152,15 @@
       </iframe>
     </div>
 
-    <a href="https://www.google.com/maps/dir/?api=1&destination=C.22+Sabana+Perdida,+Santo+Domingo+Norte,+RD"
-       target="_blank"
-       class="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-xl shadow-md hover:bg-blue-700 transition animate-slide-up">
-       Cómo llegar
-    </a>
+    <div class="mt-8 text-center" data-reveal="up">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=C.22+Sabana+Perdida,+Santo+Domingo+Norte,+RD"
+         target="_blank" rel="noopener" class="btn-primary">
+        Cómo llegar
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
   </div>
 </section>
-
-<!-- Animations with Tailwind -->
-<style>
-@keyframes fade-in { from {opacity:0;} to {opacity:1;} }
-@keyframes slide-up { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-
-.animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
-.animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
-.animate-slide-up.delay-100 { animation-delay: 0.1s; }
-.animate-slide-up.delay-150 { animation-delay: 0.15s; }
-.animate-slide-up.delay-200 { animation-delay: 0.2s; }
-</style>
 {% endblock %}
+
+{% block cta %}{% endblock %}

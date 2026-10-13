@@ -1,46 +1,50 @@
 {% extends "base.html" %}
-{% load static %}
+
+{% block title %}¡Gracias! · FastConnect{% endblock %}
+{% block header_tone %}light{% endblock %}
 
 {% block content %}
-<section class="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 relative overflow-hidden">
-  <!-- Confetti canvas -->
-  <canvas id="confetti-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+<section class="relative isolate flex min-h-[85svh] items-center justify-center overflow-hidden px-5 pb-16 pt-32">
+  <div class="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,#000,transparent_70%)]"></div>
+  <div class="absolute left-1/2 top-1/3 -z-10 h-80 w-[36rem] -translate-x-1/2 rounded-full bg-brand-200/60 blur-3xl"></div>
 
-  <div class="bg-white shadow-lg rounded-2xl p-8 text-center max-w-md animate__animated animate__zoomIn">
-    <h1 class="text-3xl font-bold text-green-600 mb-4 animate__animated animate__fadeInDown">¡Gracias!</h1>
-    <p class="text-gray-700 mb-6 animate__animated animate__fadeInUp">
-      Tu solicitud ha sido enviada <span class="font-semibold">exitosamente</span>.
+  <div class="card w-full max-w-lg !p-10 text-center sm:!p-14" data-reveal="zoom">
+    <svg class="mx-auto h-24 w-24" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <circle class="check-circle" cx="28" cy="28" r="26" stroke="url(#ok)" stroke-width="3"/>
+      <path class="check-mark" d="m17 29 7 7 15-15" stroke="url(#ok)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="ok" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#1d53f0"/><stop offset="1" stop-color="#0fbcdc"/></linearGradient>
+      </defs>
+    </svg>
+
+    <h1 class="mt-8 text-4xl font-extrabold sm:text-5xl">¡Gracias!</h1>
+    <p class="mt-4 text-lg text-slate-600">
+      Tu solicitud ha sido enviada <span class="font-semibold text-slate-900">exitosamente</span>.
     </p>
+    <p class="mt-2 text-sm text-slate-500">Nuestro equipo se pondrá en contacto contigo muy pronto.</p>
 
-    <a href="{% url 'home:home' %}" class="inline-block animate__animated animate__bounce mt-4">
-      <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition duration-300">
-        Volver al inicio
-      </button>
-    </a>
+    <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+      <a href="{% url 'home:home' %}" class="btn-primary">Volver al inicio</a>
+      <a href="{% url 'home:plan' %}" class="btn-outline">Ver planes</a>
+    </div>
   </div>
 </section>
+{% endblock %}
 
-<!-- Confetti JS -->
+{% block cta %}{% endblock %}
+
+{% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const duration = 3000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
-
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      const particleCount = 50 * (timeLeft / duration);
-      confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-    }, 250);
+    if (typeof confetti !== 'function' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const colors = ['#1d53f0', '#3372fb', '#38d6f5', '#7deaff', '#fbbf24'];
+    const end = Date.now() + 1800;
+    (function frame() {
+      confetti({ particleCount: 4, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, colors });
+      confetti({ particleCount: 4, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
   });
 </script>
-
-<!-- Animate.css for smooth entrance -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 {% endblock %}

@@ -3,252 +3,247 @@
 
 {% block content %}
 
-<!-- Hero Section -->
-<div class="relative w-full h-screen overflow-hidden">
-  <!-- Background Video -->
-  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+<!-- Hero -->
+<section class="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-night-950 pt-20">
+  <video autoplay loop muted playsinline aria-hidden="true" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-50">
     <source src="{% static 'home/backg.mp4' %}" type="video/mp4">
   </video>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-night-950 via-night-950/85 to-night-900/40"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-night-950 via-transparent to-night-950/60"></div>
+  <div class="bg-grid absolute inset-0 -z-10 opacity-60"></div>
+  <div class="absolute -left-32 top-1/4 -z-10 h-96 w-96 rounded-full bg-brand-600/30 blur-[120px]"></div>
+  <div class="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-glow-500/20 blur-[120px]"></div>
 
-  <!-- Animated Gradient Overlay -->
-  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent animate-gradient-bg"></div>
+  <span class="streak top-[22%]" style="animation-delay:0s"></span>
+  <span class="streak top-[48%]" style="animation-delay:2.2s; width:30%"></span>
+  <span class="streak top-[76%]" style="animation-delay:4.1s; width:50%"></span>
 
-  <!-- Particle Canvas -->
-  <canvas id="particles" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+  <div class="container-page grid items-center gap-14 py-16 lg:grid-cols-12 lg:py-24">
+    <div class="lg:col-span-7">
+      <span class="eyebrow-dark hero-fade" style="--delay:0">
+        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-glow-400 opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-glow-400"></span></span>
+        Fibra óptica · Santo Domingo
+      </span>
 
-  <!-- Hero Content -->
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
-    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight drop-shadow-lg opacity-0 animate-fade-in-down">
-      <span class="block">FastConnect</span>
-    </h1>
-    <p class="max-w-xl text-base sm:text-lg md:text-2xl font-light mb-6 opacity-0 animate-fade-in-up delay-300">
-      Te conecta a la velocidad que mereces. Internet rápido, estable y accesible para tu hogar.
-    </p>
-    <a href="{% url 'home:plan' %}"
-       class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 rounded-full text-base sm:text-lg font-bold uppercase transition duration-300 transform hover:scale-110 shadow-2xl animate-bounce-once">
-      Ver Planes
-    </a>
-  </div>
-</div>
+      <h1 class="mt-6 text-[2.6rem] font-extrabold leading-[1.05] !text-white sm:text-6xl lg:text-7xl">
+        <span class="hero-word" style="--i:0">Te</span>
+        <span class="hero-word" style="--i:1">conectamos</span>
+        <span class="hero-word" style="--i:2">a</span>
+        <span class="hero-word" style="--i:3">la</span>
+        <span class="hero-word text-gradient" style="--i:4">velocidad</span>
+        <span class="hero-word" style="--i:5">que</span>
+        <span class="hero-word" style="--i:6">mereces.</span>
+      </h1>
 
-<!-- Tailwind Animations -->
-<style>
-@keyframes fade-in-down { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes fade-in-up { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes gradient-bg { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-@keyframes bounce-once { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+      <p class="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl" style="--delay:700">
+        Internet rápido, estable y accesible para tu hogar. Instalación en tiempo récord y soporte 24/7.
+      </p>
 
-.animate-fade-in-down { animation: fade-in-down 1s forwards; }
-.animate-fade-in-up { animation: fade-in-up 1s forwards; }
-.animate-gradient-bg { background: linear-gradient(120deg, rgba(0,0,0,0.8), rgba(0,0,0,0.3), rgba(0,0,0,0.8)); background-size: 200% 200%; animation: gradient-bg 10s ease infinite; }
-.animate-bounce-once { animation: bounce-once 1s ease-in-out; }
-.delay-300 { animation-delay: 0.3s; }
-</style>
-
-<!-- Particle Script -->
-<script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particlesArray = [];
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 3 + 1;
-    this.speedX = (Math.random() - 0.5) * 1;
-    this.speedY = (Math.random() - 0.5) * 1;
-    this.color = 'rgba(255,255,255,' + Math.random() + ')';
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if(this.x < 0) this.x = canvas.width;
-    if(this.x > canvas.width) this.x = 0;
-    if(this.y < 0) this.y = canvas.height;
-    if(this.y > canvas.height) this.y = 0;
-  }
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-function initParticles(count = 100) {
-  particlesArray = [];
-  for(let i = 0; i < count; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-
-function animateParticles() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particlesArray.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animateParticles);
-}
-
-initParticles();
-animateParticles();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  initParticles();
-});
-</script>
-
-<!-- Features Section -->
-<div class="py-16 sm:py-20 bg-gray-100">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12">Con nosotros obtendrás</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
-
-      <!-- Feature 1 -->
-      <div class="group p-6 sm:p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="100">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 sm:h-12 md:h-16 w-10 sm:w-12 md:w-16 mx-auto mb-4 text-blue-500 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L6 12h5v8h2v-8h5L12 2z"/>
-        </svg>
-        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">Velocidad garantizada</h3>
-        <p class="text-gray-600 text-sm sm:text-base">Disfruta de la máxima velocidad sin interrupciones para todas tus actividades en línea.</p>
-      </div>
-
-      <!-- Feature 2 -->
-      <div class="group p-6 sm:p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 sm:h-12 md:h-16 w-10 sm:w-12 md:w-16 mx-auto mb-4 text-blue-500 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
-        </svg>
-        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">Instalación rápida</h3>
-        <p class="text-gray-600 text-sm sm:text-base">Nuestro equipo de profesionales te conectará en tiempo récord y sin complicaciones.</p>
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="group p-6 sm:p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 sm:h-12 md:h-16 w-10 sm:w-12 md:w-16 mx-auto mb-4 text-blue-500 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
-        </svg>
-        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">Planes flexibles</h3>
-        <p class="text-gray-600 text-sm sm:text-base">Elige el plan que mejor se adapte a tus necesidades y presupuesto, sin contratos forzosos.</p>
-      </div>
-
-      <!-- Feature 4 -->
-      <div class="group p-6 sm:p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="400">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 sm:h-12 md:h-16 w-10 sm:w-12 md:w-16 mx-auto mb-4 text-blue-500 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm0-4h-2V7h2v7z"/>
-        </svg>
-        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">Soporte técnico 24/7</h3>
-        <p class="text-gray-600 text-sm sm:text-base">Nuestro equipo de soporte está siempre disponible para ayudarte, cualquier día y a cualquier hora.</p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Plans Section -->
-<div id="plans" class="py-16 sm:py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">Nuestros Planes</h2>
-    <p class="text-base sm:text-xl text-center text-gray-600 mb-12">Encuentra el plan perfecto para tu hogar</p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-
-      <!-- Plan Básico -->
-      <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 sm:p-8 text-center hover:border-blue-500 transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="100">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Plan Básico</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">10 Mbps</div>
-        <p class="text-gray-600 text-sm sm:text-base mb-6">Perfecto para navegación básica y streaming en HD</p>
-        <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">RD$800.00<span class="text-sm sm:text-lg font-normal text-gray-600">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Básico,%20de%2010%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
+      <div class="hero-fade mt-9 flex flex-col gap-3 sm:flex-row" style="--delay:850">
+        <a href="{% url 'home:plan' %}" class="btn-primary">
+          Ver planes
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/18494916347?text=Quiero%20saber%20más%20acerca%20de%20sus%20planes%20y%20servicios" target="_blank" rel="noopener" class="btn-ghost-dark">
+          Hablar con un asesor
         </a>
       </div>
 
-      <!-- Plan Intermedio -->
-      <div class="bg-blue-600 text-white rounded-2xl p-6 sm:p-8 text-center transform scale-100 sm:scale-105 shadow-2xl"
-           data-aos="fade-up" data-aos-delay="200">
-        <div class="bg-yellow-400 text-blue-900 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-bold mb-4 inline-block">
-          MÁS POPULAR
+      <ul class="hero-fade mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300" style="--delay:1000">
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 text-glow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          Sin contratos forzosos
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 text-glow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          Hasta 200 Mbps
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 text-glow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+          Soporte técnico 24/7
+        </li>
+      </ul>
+    </div>
+
+    <!-- Speed gauge -->
+    <div class="hero-fade hidden lg:col-span-5 lg:block" style="--delay:500">
+      <div class="relative mx-auto max-w-sm animate-float">
+        <div class="absolute inset-0 -z-10 rounded-[2rem] bg-brand-600/30 blur-3xl"></div>
+        <div class="rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 shadow-2xl backdrop-blur-xl">
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-medium text-slate-300">Prueba de velocidad</span>
+            <span class="flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-1 text-xs font-semibold text-emerald-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> En línea
+            </span>
+          </div>
+
+          <div class="relative mx-auto mt-6 h-56 w-56">
+            <svg viewBox="0 0 200 200" class="h-full w-full -rotate-[225deg]" aria-hidden="true">
+              <defs>
+                <linearGradient id="gauge" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#3372fb"/>
+                  <stop offset="100%" stop-color="#38d6f5"/>
+                </linearGradient>
+              </defs>
+              <!-- 270° arc: circumference 2π·84 ≈ 527.8, arc length ≈ 395.8 -->
+              <circle cx="100" cy="100" r="84" fill="none" stroke="rgb(255 255 255 / .08)" stroke-width="14" stroke-linecap="round" stroke-dasharray="395.8 527.8"/>
+              <circle cx="100" cy="100" r="84" fill="none" stroke="url(#gauge)" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="0 527.8" class="gauge-fill" style="filter: drop-shadow(0 0 8px #38d6f5)"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="font-display text-6xl font-extrabold text-white" data-count-to="200">0</span>
+              <span class="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-glow-300">Mbps</span>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+            <div class="rounded-2xl bg-white/5 p-3">
+              <p class="text-[0.7rem] uppercase tracking-wider text-slate-400">Bajada</p>
+              <p class="mt-1 font-display font-bold text-white">200</p>
+            </div>
+            <div class="rounded-2xl bg-white/5 p-3">
+              <p class="text-[0.7rem] uppercase tracking-wider text-slate-400">Subida</p>
+              <p class="mt-1 font-display font-bold text-white">100</p>
+            </div>
+            <div class="rounded-2xl bg-white/5 p-3">
+              <p class="text-[0.7rem] uppercase tracking-wider text-slate-400">Latencia</p>
+              <p class="mt-1 font-display font-bold text-white">Baja</p>
+            </div>
+          </div>
         </div>
-        <h3 class="text-xl sm:text-2xl font-bold mb-4">Plan Intermedio</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold mb-2">80 Mbps</div>
-        <p class="text-blue-100 text-sm sm:text-base mb-6">Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas.</p>
-        <div class="text-2xl sm:text-3xl font-bold mb-6">RD$1,500.00<span class="text-sm sm:text-lg font-normal text-blue-200">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Intermedio,%20de%2080%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-white text-blue-600 hover:bg-gray-300 active:scale-95 rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
-        </a>
       </div>
-
-      <!-- Plan Esencial -->
-      <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 sm:p-8 text-center hover:border-blue-500 transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="300">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Plan Esencial</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">50 Mbps</div>
-        <p class="text-gray-600 text-sm sm:text-base mb-6">Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo.</p>
-        <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">RD$1,000.00<span class="text-sm sm:text-lg font-normal text-gray-600">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Esencial,%20de%2050%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
-        </a>
-      </div>
-
-      <!-- Plan Avanzado -->
-      <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 sm:p-8 text-center hover:border-blue-500 transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="400">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Plan Avanzado</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">100 Mbps</div>
-        <p class="text-gray-600 text-sm sm:text-base mb-6">Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición.</p>
-        <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">RD$2,000.00<span class="text-sm sm:text-lg font-normal text-gray-600">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Avanzado,%20de%20100%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
-        </a>
-      </div>
-
-      <!-- Plan Ultra -->
-      <div class="bg-yellow-500 border-2 border-yellow-200 rounded-2xl p-6 sm:p-8 text-center hover:border-yellow-500 transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="500">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Plan Ultra</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">200 Mbps</div>
-        <p class="text-gray-600 text-sm sm:text-base mb-6">La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming.</p>
-        <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">RD$3,400.00<span class="text-sm sm:text-lg font-normal text-gray-600">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Ultra,%20de%20200%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
-        </a>
-      </div>
-
-      <!-- Plan Premium -->
-      <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 sm:p-8 text-center hover:border-blue-500 transform transition duration-500"
-           data-aos="fade-up" data-aos-delay="600">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Plan Premium</h3>
-        <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">150 Mbps</div>
-        <p class="text-gray-600 text-sm sm:text-base mb-6">Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones.</p>
-        <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">RD$2,500.00<span class="text-sm sm:text-lg font-normal text-gray-600">/mes</span></div>
-        <a href="https://wa.me/18494916347?text=Quiero%20solicitar%20el%20Plan%20Premium,%20de%20150%20Mbps,%20¿cuándo%20puedo%20agendar%20mi%20instalación?" target="_blank">
-          <button class="w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-full font-bold transition duration-300">
-            Solicitar ahora
-          </button>
-        </a>
-      </div>
-
     </div>
   </div>
-</div>
 
+  <a href="#beneficios" class="scroll-cue absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-slate-400 transition hover:text-white sm:flex" aria-label="Ir a beneficios">
+    <span class="flex h-9 w-6 justify-center rounded-full border border-white/25 pt-2"><span class="block h-2 w-1 rounded-full bg-white/70"></span></span>
+  </a>
+</section>
+
+<!-- Features -->
+<section id="beneficios" class="relative scroll-mt-20 py-20 sm:py-28">
+  <div class="bg-dots pointer-events-none absolute inset-x-0 top-0 h-72 [mask-image:linear-gradient(to_bottom,#000,transparent)]"></div>
+  <div class="container-page relative">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Beneficios</span>
+      <h2 class="section-title">Con nosotros obtendrás</h2>
+      <p class="section-lead">Todo lo que necesitas para disfrutar de internet sin preocupaciones.</p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="card card-hover spotlight group" data-reveal="up" data-delay="0" data-spotlight>
+        <div class="icon-tile transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3 class="mt-6 text-xl font-semibold">Velocidad garantizada</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500">Disfruta de la máxima velocidad sin interrupciones para todas tus actividades en línea.</p>
+      </div>
+
+      <div class="card card-hover spotlight group" data-reveal="up" data-delay="100" data-spotlight>
+        <div class="icon-tile transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        </div>
+        <h3 class="mt-6 text-xl font-semibold">Instalación rápida</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500">Nuestro equipo de profesionales te conectará en tiempo récord y sin complicaciones.</p>
+      </div>
+
+      <div class="card card-hover spotlight group" data-reveal="up" data-delay="200" data-spotlight>
+        <div class="icon-tile transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+        </div>
+        <h3 class="mt-6 text-xl font-semibold">Planes flexibles</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500">Elige el plan que mejor se adapte a tus necesidades y presupuesto, sin contratos forzosos.</p>
+      </div>
+
+      <div class="card card-hover spotlight group" data-reveal="up" data-delay="300" data-spotlight>
+        <div class="icon-tile transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <h3 class="mt-6 text-xl font-semibold">Soporte técnico 24/7</h3>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500">Nuestro equipo de soporte está siempre disponible para ayudarte, cualquier día y a cualquier hora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans -->
+<section id="plans" class="relative scroll-mt-20 overflow-hidden bg-white py-20 sm:py-28">
+  <div class="pointer-events-none absolute left-1/2 top-0 h-[28rem] w-[60rem] -translate-x-1/2 rounded-full bg-brand-100/60 blur-3xl"></div>
+  <div class="container-page relative">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Planes</span>
+      <h2 class="section-title">Nuestros planes</h2>
+      <p class="section-lead">Encuentra el plan perfecto para tu hogar.</p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {% include "home/partials/plan_card.html" with name="Básico" speed="10" upload="5" pct=5 price="800.00" code="pb" support="24/7" desc="Perfecto para navegación básica y streaming en HD." delay=0 %}
+      {% include "home/partials/plan_card.html" with name="Esencial" speed="50" upload="25" pct=25 price="1,000.00" code="pe" support="24/7" desc="Ideal para trabajar desde casa y disfrutar de varias aplicaciones al mismo tiempo." delay=100 %}
+      {% include "home/partials/plan_card.html" with name="Intermedio" speed="80" upload="40" pct=40 price="1,500.00" code="pi" support="24/7" featured=True desc="Perfecto para familias que necesitan velocidad estable para streaming en 4K y videollamadas." delay=200 %}
+      {% include "home/partials/plan_card.html" with name="Avanzado" speed="100" upload="50" pct=50 price="2,000.00" code="pa" support="24/7" desc="Diseñado para usuarios exigentes que juegan en línea y transmiten contenido en alta definición." delay=0 %}
+      {% include "home/partials/plan_card.html" with name="Premium" speed="150" upload="75" pct=75 price="2,500.00" code="pp" support="24/7" desc="Conexión rápida y confiable para múltiples dispositivos y streaming sin interrupciones." delay=100 %}
+      {% include "home/partials/plan_card.html" with name="Ultra" speed="200" upload="100" pct=100 price="3,400.00" code="pu" support="VIP 24/7" desc="La máxima velocidad para hogares con alta demanda de internet y experiencias en 4K/8K y gaming." delay=200 %}
+    </div>
+
+    <div class="mt-12 text-center" data-reveal="up">
+      <a href="{% url 'home:plan' %}#comparison" class="inline-flex items-center gap-2 font-semibold text-brand-700 transition hover:gap-3">
+        Comparar todos los planes
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="py-20 sm:py-28">
+  <div class="container-page">
+    <div class="mx-auto max-w-2xl text-center" data-reveal="up">
+      <span class="eyebrow">Así de fácil</span>
+      <h2 class="section-title">Conéctate en 3 pasos</h2>
+    </div>
+
+    <ol class="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+      <!-- connecting line -->
+      <div class="pointer-events-none absolute left-[16.6%] right-[16.6%] top-8 hidden h-px bg-gradient-to-r from-brand-200 via-brand-400 to-glow-400 md:block" aria-hidden="true"></div>
+
+      <li class="relative text-center" data-reveal="up" data-delay="0">
+        <span class="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-brand-200 bg-white font-display text-xl font-bold text-brand-700 shadow-lg shadow-brand-500/10">1</span>
+        <h3 class="mt-6 text-xl font-semibold">Elige tu plan</h3>
+        <p class="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-slate-500">Compara velocidades y precios y escoge el que mejor va contigo.</p>
+      </li>
+      <li class="relative text-center" data-reveal="up" data-delay="150">
+        <span class="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-brand-200 bg-white font-display text-xl font-bold text-brand-700 shadow-lg shadow-brand-500/10">2</span>
+        <h3 class="mt-6 text-xl font-semibold">Escríbenos</h3>
+        <p class="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-slate-500">Contáctanos por WhatsApp, teléfono o el formulario y agendamos tu visita.</p>
+      </li>
+      <li class="relative text-center" data-reveal="up" data-delay="300">
+        <span class="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-glow-500 font-display text-xl font-bold text-white shadow-lg shadow-brand-500/40">3</span>
+        <h3 class="mt-6 text-xl font-semibold">¡Listo, a navegar!</h3>
+        <p class="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-slate-500">Nuestro equipo instala tu conexión de fibra óptica en tiempo récord.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // fill the hero gauge in sync with its counter
+  (() => {
+    const fill = document.querySelector('.gauge-fill');
+    if (!fill) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const full = 395.8;
+    if (reduce) { fill.setAttribute('stroke-dasharray', `${full} 527.8`); return; }
+    const start = performance.now() + 600;
+    const tick = (now) => {
+      const p = Math.max(0, Math.min((now - start) / 1600, 1));
+      const eased = 1 - Math.pow(1 - p, 4);
+      fill.setAttribute('stroke-dasharray', `${full * eased} 527.8`);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  })();
+</script>
 {% endblock %}
